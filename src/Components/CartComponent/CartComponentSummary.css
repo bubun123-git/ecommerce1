@@ -1,0 +1,19 @@
+/* CartComponentSummary.css */
+.prod-images {
+    display: flex;
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    transform-origin: center center;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    transition: ease-in 0.5s;
+    filter: brightness(100%);
+    min-height: 200px;
+    
+}
+.prod-images + .prod-images {
+    margin-top: 20px;
+}
