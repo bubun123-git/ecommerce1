@@ -1,5 +1,6 @@
-import React from 'react'; 
+import React from 'react';
 import '../CartComponent/CartComponentSummary.css'
+import Card from '../UI/Card';
 
 const cartElements = [
     {
@@ -25,24 +26,29 @@ const cartElements = [
 const CartComponentSummary = () => {
     const Cartlist = cartElements.map((item, index) => (
         <li key={index} className='prod-images' >
-      <img src={item.imageUrl} alt={item.title} />
-      
-      <div>
-        <h2 >{item.title}</h2>
-        <p >Price: ${item.price}</p>
-        <p >Quantity: {item.quantity}</p>
-        <button>Add to Cart</button>
-      </div>
-    </li>
+            <img src={item.imageUrl} alt={item.title} />
+
+
+            <div>
+
+                <h2 >{item.title}</h2>
+                <p >Price: ${item.price}</p>
+                <p >Quantity: {item.quantity}</p>
+                <button>Add to Cart</button>
+            </div>
+        </li>
     ));
 
     return (
         <section>
-            <ul className='prod-images + .prod-images'>
-                {Cartlist}
-                <br></br>
-                <button>Open Cart</button>
-            </ul>
+            <Card>
+                <ul className='prod-images + .prod-images'>
+                    {Cartlist}
+                    <br></br>
+                    <button>Open Cart</button>
+                </ul>
+            </Card>
+
         </section>
     );
 };
