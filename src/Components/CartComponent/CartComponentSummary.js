@@ -3,7 +3,6 @@ import '../CartComponent/CartComponentSummary.css'
 import Card from '../UI/Card';
 import { useRef } from 'react';
 
-
 const cartElements = [
     {
         title: 'Colors',

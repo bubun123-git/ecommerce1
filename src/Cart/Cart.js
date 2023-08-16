@@ -1,12 +1,12 @@
 import Modal from "../Components/UI/Modal"
 
 const Cart = (props) => {
-const purchaseHandler =() => {
-    alert("Thank you for the Purchase")
-}
+    const purchaseHandler = () => {
+        alert("Thank you for the Purchase")
+    }
 
     const cartitems = <ul>
-        {}
+        { }
     </ul>
     return (
         <Modal>
