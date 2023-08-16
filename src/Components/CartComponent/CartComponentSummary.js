@@ -25,7 +25,7 @@ const cartElements = [
     }
 ];
 
-const CartComponentSummary = (props) => {
+const CartComponentSummary = () => {
     const amountInputRef = useRef()
 
     const SubmitHandler = event => {
