@@ -1,6 +1,10 @@
 import Modal from "../Components/UI/Modal"
 
 const Cart = (props) => {
+const purchaseHandler =() => {
+    alert("Thank you for the Purchase")
+}
+
     const cartitems = <ul>
         {}
     </ul>
@@ -13,7 +17,7 @@ const Cart = (props) => {
             </div>
             <div>
                 <button onClick={props.onClose}>Close</button>
-                <button>Purchase</button>
+                <button onClick={purchaseHandler}>Purchase</button>
             </div>
         </Modal>
     )

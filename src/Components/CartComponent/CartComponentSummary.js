@@ -3,6 +3,7 @@ import '../CartComponent/CartComponentSummary.css'
 import Card from '../UI/Card';
 import { useRef } from 'react';
 
+
 const cartElements = [
     {
         title: 'Colors',
@@ -24,7 +25,7 @@ const cartElements = [
     }
 ];
 
-const CartComponentSummary = () => {
+const CartComponentSummary = (props) => {
     const amountInputRef = useRef()
 
     const SubmitHandler = event => {
