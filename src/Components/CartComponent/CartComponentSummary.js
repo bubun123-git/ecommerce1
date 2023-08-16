@@ -1,6 +1,7 @@
 import React from 'react';
 import '../CartComponent/CartComponentSummary.css'
 import Card from '../UI/Card';
+import { useRef } from 'react';
 
 const cartElements = [
     {
@@ -24,6 +25,12 @@ const cartElements = [
 ];
 
 const CartComponentSummary = () => {
+    const amountInputRef = useRef()
+
+    const SubmitHandler = event => {
+        event.preventDefault()
+    }
+
     const Cartlist = cartElements.map((item, index) => (
         <li key={index} className='prod-images' >
             <img src={item.imageUrl} alt={item.title} />
