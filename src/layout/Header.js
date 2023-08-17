@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import classes from '../Layout/Header.module.css'
+import classes from './Header.module.css'
 import HeaderCartButton from "./HeaderCartButton";
 
 const Header = props => {
@@ -7,7 +7,7 @@ const Header = props => {
         <Fragment>
             <header className={classes.header}>
                 <h1>The Generic</h1>
-                <HeaderCartButton onShowCart={props.onShowCart}/>
+                <HeaderCartButton/>
             </header>
         </Fragment>
     );
