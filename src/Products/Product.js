@@ -3,11 +3,11 @@ import AvailableProduct from "./AvailableProduct"
 import { Fragment } from "react"
 
 
-const Product =() => {
+const Product =(props) => {
     return (
         <Fragment>
             <ProductSummary/>
-            <AvailableProduct/>
+            <AvailableProduct onClick={props.onClick}/>
         </Fragment>
     )
 }

@@ -23,7 +23,7 @@ const DummyElements = [
     },
 ];
 
-const AvailableProduct = () => {
+const AvailableProduct = (props) => {
     const productList = DummyElements.map((item, index) => (
         <ProductItem
         key={index}
@@ -38,8 +38,8 @@ const AvailableProduct = () => {
         <section className={classes.meals}>
             <Card>
                 <ul>{productList}</ul>
-            </Card>
-
+            </Card> <br/><br/>
+            <button style={{ backgroundColor: '#008CBA' }} onClick={props.onClick}>OPEN CART</button>
         </section>
     );
 };

@@ -1,6 +1,10 @@
 import classes from './ProductItemForm.module.css'
 import Input from '../../UI/Input'
 const ProductItemForm = props => {
+const SubmtHandler = (event)=> {
+    event.preventDefault()
+}
+
     return (
         <form className={classes.form}>
             <Input label="Amount" input={{
