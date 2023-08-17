@@ -4,7 +4,7 @@ const ProductItemForm = props => {
     return (
         <form className={classes.form}>
             <Input label="Amount" input={{
-                id: "amount",
+                id: 'amount_' + props.id,
                 type: 'number',
                 defaultValue: 1
             }} />
