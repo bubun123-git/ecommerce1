@@ -1,6 +1,7 @@
 import React from 'react';
 import './ProductItem.module.css';
 
+
 const ProductItem = (props) => {
 
 
@@ -12,6 +13,10 @@ const ProductItem = (props) => {
                 <p style={{ color: "red" }}>Price: Rs {props.price}</p>
                 <p>Quantity: {props.quantity}</p>
             </li>
+
+            <button>
+                Add To Cart
+            </button><br/>
         </div>
 
     );
