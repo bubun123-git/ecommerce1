@@ -6,6 +6,8 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
+
+
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
     const updatedTotalAmount =
@@ -35,14 +37,34 @@ const cartReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+
   if (action.type === "REMOVE") {
-    const updatedItems = state.items.filter((item) => item.id !== action.id);
-    const updatedTotalAmount = state.totalAmount - action.price * action.amount; // Corrected the calculation here
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.id
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+
+    const updatedTotalAmount = state.totalAmount - existingCartItem.price;
+
+    let updatedItems;
+
+    if (existingCartItem.amount === 1) {
+      updatedItems = state.items.filter((item) => item.id !== action.id);
+    } else {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    }
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
     };
   }
+
   return defaultCartState;
 };
 
@@ -53,8 +75,8 @@ function CartProvider(props) {
     dispatchAction({ type: "ADD", item: item });
   };
 
-  const removeItemFromCartHandler = (id, price, amount) => { // Added 'amount' parameter here
-    dispatchAction({ type: "REMOVE", id: id, price: price, amount: amount });
+  const removeItemFromCartHandler = (id) => {
+    dispatchAction({ type: "REMOVE", id: id });
   };
 
   const cartContextValue = {
@@ -71,4 +93,4 @@ function CartProvider(props) {
   );
 }
 
-export default CartProvider; // Changed 'Cartprovider' to 'CartProvider'
+export default CartProvider;
