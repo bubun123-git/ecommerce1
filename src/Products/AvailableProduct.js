@@ -26,12 +26,13 @@ const DummyElements = [
 const AvailableProduct = (props) => {
     const productList = DummyElements.map((item, index) => (
         <ProductItem
-        key={index}
-        title={item.title}
-        price={item.price}
-        imageUrl={item.imageUrl}
-        quantity={item.quantity}
-    />
+            key={index}
+            id={index} // Assigning a unique id to each product
+            title={item.title}
+            price={item.price}
+            imageUrl={item.imageUrl}
+            quantity={item.quantity}
+        />
     ));
 
     return (

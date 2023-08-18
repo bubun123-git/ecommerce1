@@ -1,9 +1,20 @@
 import React from 'react';
 import './ProductItem.module.css';
-
+import { useContext } from 'react';
+import CartContext from '../../Store/Cart-context';
 
 const ProductItem = (props) => {
+    const cartCtx = useContext(CartContext)
 
+
+    const addToCartHandler = (amount) => {
+        cartCtx.addItem({
+            id: props.id,
+            name: props.title,
+            amount: amount,
+            price: props.price
+        });
+    };
 
     return (
         <div>
@@ -14,9 +25,9 @@ const ProductItem = (props) => {
                 <p>Quantity: {props.quantity}</p>
             </li>
 
-            <button>
+            <button onClick={() => addToCartHandler(props.quantity)}>
                 Add To Cart
-            </button><br/>
+            </button><br />
         </div>
 
     );
