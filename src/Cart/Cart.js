@@ -1,34 +1,49 @@
 import Modal from "../UI/Modal";
+import { useContext } from "react";
+import CartContext from "../Store/Cart-context";
+import CartItem from "./CartItem";
 
 const Cart = (props) => {
-    const cartItems = [
-        { id: 'c1', name: 'Sushi', amount: 2, price: 12.99 }
-    ];
+    const cartCtx = useContext(CartContext);
+    const cartItemRemoveHandler= id => {
+        
+    }
 
-    const cartItemsList = cartItems.map((item) => (
-        <li key={item.id}>
-            {item.name} - Quantity: {item.amount} - Price: ${item.price.toFixed(2)}
-        </li>
+    const cartItemAddHandler = item => {
+
+    }
+    const cartItemsList = cartCtx.items.map((item) => (
+        <CartItem
+            key={item.id}
+            name={item.name}
+            amount={item.amount}
+            price={item.price}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
+            onAdd={cartItemAddHandler.bind(null, item)}
+        />
     ));
 
-    function OrderHandler() {
-        alert("Your Order is successful")
+    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`; // Fixed the totalAmount line
+
+    function orderHandler() {
+        alert("Your Order is successful");
     }
 
     return (
         <Modal onClose={props.onClose}>
             <ul>{cartItemsList}</ul>
             <div>
-                <span>Total Amount</span>
-                <span>35.62</span>
+                <span>Total Amount: {totalAmount}</span>
+                
             </div>
             <div>
                 <button onClick={props.onClose}>Close</button>
-                <button onClick={OrderHandler}>Order</button>
+                <button onClick={orderHandler}>Order</button> {/* Changed OrderHandler to orderHandler */}
             </div>
-
         </Modal>
     );
 };
 
 export default Cart;
+
+
