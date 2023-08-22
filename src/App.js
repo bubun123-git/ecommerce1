@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import './App.css';
 import Header from './layout/Header';
 import Product from './Products/Product';
@@ -8,26 +8,30 @@ import Cartprovider from './Store/CartProvider';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import Homepage from './Pages/Home/Home';
 import AboutPage from './Pages/About/About';
-
+import RootLayout from './Root';
+import Footer from './Components/Footer/Footer';
 const routeDefinitions = createRoutesFromElements(
 
-  <Route>
-    <Route path="/Home" elements={<Homepage />} />
-    <Route path="/Abouts" element={<AboutPage />} />
+  // <Route>
+  //   <Route path="/Home" elements={<Homepage />} />
+  //   <Route path="/Abouts" element={<AboutPage />} />
 
 
-  </Route>
+  // </Route>
 )
 
-const router = createBrowserRouter(routeDefinitions)
+// const router = createBrowserRouter(routeDefinitions)
 
-// const router = createBrowserRouter([
-//   { path: '/', element: <Homepage /> },
-//   {
-//     path: '/Abouts', element: <AboutPage />
-//   }
-// ])
-
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { path: '/Home', element: <Homepage /> },
+      { path: '/Abouts', element: <AboutPage /> },
+    ],
+  },
+]);
 
 
 function App() {
@@ -53,7 +57,7 @@ function App() {
         <main>
           <Product onClick={ShowCartHandler} />
         </main>
-
+        <Footer/>
       </Cartprovider>
     </>
 
