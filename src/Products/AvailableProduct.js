@@ -1,6 +1,7 @@
-import classes from './AvailableMeals.module.css'
+import classes from './AvailableMeals.module.css';
 import Card from '../UI/Card';
 import ProductItem from './ProductItem/ProductItem';
+import axios from 'axios';
 
 const DummyElements = [
     {
@@ -27,7 +28,7 @@ const AvailableProduct = (props) => {
     const productList = DummyElements.map((item, index) => (
         <ProductItem
             key={index}
-            id={index} 
+            id={index}
             title={item.title}
             price={item.price}
             imageUrl={item.imageUrl}
@@ -35,12 +36,30 @@ const AvailableProduct = (props) => {
         />
     ));
 
+    // Function to send the products via Axios POST
+    const addProductsToCart = () => {
+        axios.post('https://crudcrud.com/api/689caeaa4a3e4174b36235b39d18c0be', DummyElements) 
+            .then((response) => {
+
+                console.log('Products added to cart successfully');
+            })
+            .catch((error) => {
+
+                console.error('Error adding products to cart:', error);
+            });
+    };
+
     return (
         <section className={classes.meals}>
             <Card>
                 <ul>{productList}</ul>
-            </Card> <br/><br/>
-            <button style={{ backgroundColor: '#008CBA' }} onClick={props.onClick}>OPEN CART</button>
+            </Card> <br /><br />
+            <button
+                style={{ backgroundColor: '#008CBA' }}
+                onClick={addProductsToCart} 
+            >
+                OPEN CART
+            </button>
         </section>
     );
 };
