@@ -10,7 +10,7 @@ import Homepage from './Pages/Home/Home';
 import AboutPage from './Pages/About/About';
 import RootLayout from './Root';
 import Footer from './Components/Footer/Footer';
-
+import Contact from './Components/Contact/Contact';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +19,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/Home', element: <Homepage /> },
       { path: '/Abouts', element: <AboutPage /> },
-      { path: '/Products', element: <Product /> }
+      { path: '/Products', element: <Product /> },
+      {path:'/Contact', element:<Contact/>}
     ],
   },
 ]);
