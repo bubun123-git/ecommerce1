@@ -79,10 +79,11 @@ function Contact() {
                     required
                     className="form-control"
                 />
-            </div>
+            </div> <br/>
             <button type="submit" className="submit-button">Submit</button>
         </form>
     );
 }
 
 export default Contact;
+    

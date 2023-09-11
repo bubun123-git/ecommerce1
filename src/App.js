@@ -11,6 +11,7 @@ import AboutPage from './Pages/About/About';
 import RootLayout from './Root';
 import Footer from './Components/Footer/Footer';
 import Contact from './Components/Contact/Contact';
+import AuthForm from './Pages/Login/AuthForm';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,8 @@ const router = createBrowserRouter([
       { path: '/Home', element: <Homepage /> },
       { path: '/Abouts', element: <AboutPage /> },
       { path: '/Products', element: <Product /> },
-      {path:'/Contact', element:<Contact/>}
+      { path: '/Contact', element: <Contact /> },
+      { path: '/Login', element: <AuthForm /> }
     ],
   },
 ]);
