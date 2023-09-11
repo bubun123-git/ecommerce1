@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
-import  '../Login/AuthForm.css'
+import '../Login/AuthForm.css'
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -16,11 +17,14 @@ const AuthForm = () => {
 
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
-
+        setIsLoading(true);
+        let url;
         if (isLogin) {
-            console.log(enteredEmail, enteredPassword);
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBT6GISD7qFILXExg3LPHNZ2F420ZocsoQ'
+
         } else {
-            fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=YOUR_API_KEY', {
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBT6GISD7qFILXExg3LPHNZ2F420ZocsoQ'
+            fetch(url, {
                 method: 'POST',
                 body: JSON.stringify({
                     email: enteredEmail,
@@ -33,17 +37,22 @@ const AuthForm = () => {
             })
                 .then(res => {
                     if (res.ok) {
-                        // Handle successful sign-up here
-                    } else {
+                        return res.json();
+                    }
+                    else {
                         return res.json().then(data => {
                             let errorMessage = 'Authentication failed';
+
                             throw new Error(errorMessage);
                         })
                     }
                 })
+                .then(data => {
+                    console.log(data);
+
+                })
                 .catch(error => {
-                    // Handle error here
-                    console.error(error);
+                    alert(error.Message)
                 });
         }
     }
@@ -61,8 +70,9 @@ const AuthForm = () => {
                     <input type='password' id="password" required ref={passwordInputRef} />
                 </div>
                 <div className="auth-button">
-                    
-                <button >{isLogin ? 'Login' : "Create Account"}</button><br /><br />
+
+                    {!isLoading && <button >{isLogin ? 'Login' : "Create Account"}</button>}<br /><br />
+                    {isLoading && <p>Pending Request</p>}
                     <button type="button" onClick={switchModeHandler} className="toggle-button">
                         {isLogin ? 'Create New Account' : 'Login with Existing Account'}
                     </button>
