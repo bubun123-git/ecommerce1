@@ -26,7 +26,7 @@ function MainNavigation() {
                             <Link className="nav-link" to="/Login">Login</Link>
                         </li>
                         <li className="nav-item">
-                            {/* Update the 'to' attribute to "/products" */}
+                           
                             <Link className="nav-link" to="/products">Products</Link>
                         </li>
                         <li className="nav-item">

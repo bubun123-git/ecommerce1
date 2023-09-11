@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import classes from '../Login/AuthForm.css'
+import  '../Login/AuthForm.css'
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -50,20 +50,21 @@ const AuthForm = () => {
 
     return (
         <section className="auth-form">
-            <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+            <h1>{isLogin ? 'LOGIN' : "Sign Up"}</h1>
             <form onSubmit={submitHandler}>
                 <div>
-                    <label className={classes.control} htmlFor="email">Email</label>
-                    <input type="email" id="email" ref={emailInputRef} required />
+                    <label htmlFor="email">Your Email</label>
+                    <input type='email' id="email" required ref={emailInputRef} />
                 </div>
                 <div>
-                    <label className={classes.actions} htmlFor="password">Password</label>
-                    <input type="password" id="password" ref={passwordInputRef} required />
+                    <label htmlFor="password">Your Password</label>
+                    <input type='password' id="password" required ref={passwordInputRef} />
                 </div>
-                <div className={classes.actions}>
-                    <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
-                    <button type="button" className={classes.toggle} onClick={switchModeHandler}>
-                        Switch to {isLogin ? 'Sign Up' : 'Login'}
+                <div className="auth-button">
+                    
+                <button >{isLogin ? 'Login' : "Create Account"}</button><br /><br />
+                    <button type="button" onClick={switchModeHandler} className="toggle-button">
+                        {isLogin ? 'Create New Account' : 'Login with Existing Account'}
                     </button>
                 </div>
             </form>
