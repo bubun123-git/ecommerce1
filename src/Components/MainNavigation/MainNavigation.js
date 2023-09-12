@@ -1,7 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../AuthContext';
+import { useContext } from 'react';
 
-function MainNavigation() {
+function MainNavigation(props) {
+
+    const authCtx = useContext(AuthContext);
+
+    const isLoggedIn = authCtx.isLoggedIn;
+
+    const logoutHandler = () => {
+        authCtx.logout();
+      };
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -22,15 +33,22 @@ function MainNavigation() {
                         <li className="nav-item">
                             <Link className="nav-link" to="/Abouts">About</Link>
                         </li>
+                        {!isLoggedIn &&
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/Login">Login</Link>
+                            </li>
+                        }
+                        {isLoggedIn &&
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/products">Products</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="btn btn-link nav-link" onClick={logoutHandler}>Logout</button>
+                                </li>
+                            </>
+                        }
                         <li className="nav-item">
-                            <Link className="nav-link" to="/Login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                           
-                            <Link className="nav-link" to="/products">Products</Link>
-                        </li>
-                        <li className="nav-item">
-                            
                             <Link className="nav-link" to="/Contact">Contact</Link>
                         </li>
                     </ul>
@@ -41,3 +59,5 @@ function MainNavigation() {
 }
 
 export default MainNavigation;
+
+
