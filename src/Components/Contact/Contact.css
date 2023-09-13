@@ -1,40 +1,45 @@
-/* About.css */
 
-.about-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+
+.maindiv{
+    border: 1px solid rgb(218, 208, 208);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+.bikash{
+    margin: 1rem auto;
+    width: 90%;
+    max-width: 40rem;
+    text-align: center;
+    background-color: rgb(25, 24, 24);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+input[type=text],input[type=email],input[type=number],textarea {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-}
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.submit-button {
-    background-color: #007bff;
+  
+  input[type=submit] {
+    width: 50%;
+    background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 14px 20px;
+    margin: 8px 0;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
-    position: sticky;
-}
-
-.submit-button:hover {
-    background-color: #0056b3;
-}
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }

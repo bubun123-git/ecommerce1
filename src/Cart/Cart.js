@@ -26,7 +26,7 @@ const Cart = (props) => {
         />
     ));
 
-    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`; // Fixed the totalAmount line
+    const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`; 
 
     function orderHandler() {
         alert("Your Order is successful");
