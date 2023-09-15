@@ -1,30 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import Button from "react-bootstrap/Button";
-import CartContext from "../Store/Cart-Context";
 import CartItem from "./CartItem";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
-
+import CartContext from "../Store/Cart-Context";
+import { useContext } from "react";
 
 
 function Cart(props) {
-  const cartCtx = useContext(CartContext);
   const [showAlert, setShowAlert] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const cartCtx = useContext(CartContext)
 
   const enteredEmail = localStorage.getItem("email");
   const updatedEmail = enteredEmail
     ? enteredEmail.replace("@", "").replace(".", "")
     : "";
-
-    function fetchCartItems() {
+  
+    async function fetchCartItems() {
       axios
         .get(
-          `https://crudcrud.com/api/0d3217cdb83140c2a97fa6e2ea7d7c80/${updatedEmail}`
+          `https://crudcrud.com/api/6a2e2144e5164643b471ea21b3d21b33/${updatedEmail}`
         )
         .then((response) => {
           console.log(response.data);
@@ -41,38 +41,35 @@ function Cart(props) {
           console.log(cartItems);
         })
         .catch((error) => {
-          // Handle any errors here
           console.error("Error fetching cart items:", error);
         });
-    
+    }
+  
   useEffect(() => {
     fetchCartItems();
-  }, []);
-
-  //totalAmount is calculated depend upon cartItems
-  const totalAmount = cartItems.reduce((total, item) => {
-    return total + item.price;
-  }, 0);
-
-  const hasItems = cartItems.length > 0;
-
+  }, );
+  
+  // Total amount calculation
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  
+  //const hasItems = cartItems.length > 0;
+  
   async function cartItemRemoveHandler(id) {
     console.log(id, updatedEmail);
-
+  
     axios
       .delete(
-        `https://crudcrud.com/api/0d3217cdb83140c2a97fa6e2ea7d7c80/${updatedEmail}/${id}`
+        `https://crudcrud.com/api/6a2e2144e5164643b471ea21b3d21b33/${updatedEmail}/${id}`
       )
       .then(() => {
         toast.error("Item is deleted successfully!");
         fetchCartItems();
       })
       .catch((error) => {
-        // Handle any errors here
         console.error("Error deleting cart item:", error);
       });
   }
-
+  
   const cartItemList = cartItems.map((item) => (
     <CartItem
       key={item.id}
@@ -83,16 +80,16 @@ function Cart(props) {
       onRemove={() => cartItemRemoveHandler(item.id)}
     />
   ));
-
+  
   const OrderHandler = () => {
     setShowAlert(true);
   };
-
+  
   return (
     <>
       <Modal onClose={props.onClose}>
         <h2 style={{ textAlign: "center" }}>Cart</h2>
-
+  
         {cartItems.length > 0 ? (
           <ul className={classes["cart-items"]}>{cartItemList}</ul>
         ) : (
@@ -103,11 +100,9 @@ function Cart(props) {
           <span>₹{totalAmount}</span>
         </div>
         <div className={classes.actions}>
-
           <Button variant="warning" onClick={props.onClose}>
             Close
           </Button>
-
           <Button variant="danger" onClick={OrderHandler}>
             Order
           </Button>{" "}

@@ -1,53 +1,55 @@
-
-import { useState } from 'react';
-import './App.css';
-import Header from './layout/Header';
-import Product from './Products/Product';
-import Cart from './Cart/Cart';
-import Cartprovider from './Store/CartProvider';
-import { RouterProvider, createBrowserRouter, } from 'react-router-dom';
-import Homepage from './Pages/Home/Home';
-import AboutPage from './Pages/About/About';
-import RootLayout from './Root';
-import Footer from './Components/Footer/Footer';
-import Contact from './Components/Contact/Contact';
-import AuthForm from './Pages/Login/AuthForm';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />,
-    children: [
-      { path: '/Home', element: <Homepage /> },
-      { path: '/Abouts', element: <AboutPage /> },
-      { path: '/Products', element: <Product /> },
-      { path: '/Contact', element: <Contact /> },
-      { path: '/Login', element: <AuthForm /> }
-    ],
-  },
-]);
+import React, { useContext ,useState} from 'react'
+import Headers from './Component/Layout/Headers'
+import Cart from './Component/Cart/Cart'
+import Product from './Component/Product/Product'
+import Footer from './Component/Footer/Footer'
+import CartProvider from './Component/Store/CardProvider'
+import { Routes ,Route} from 'react-router-dom'
+import About from './About/About'
+import Home from './Component/HomePage/Home'
+import ContactUs from './Component/ContactUs-Page/ContactUs'
+import AuthForm from './Authentication/AuthForm'
+import AuthContext from './Component/Store/auth-Context'
+// import ProfileForm from './Authentication/Profile/ProfileForm'
+import UserProfile from './Authentication/Profile/UserProfile'
 
 
 function App() {
+  const [cartIsShown, setCartIsShown] = useState(false);
+  const authCtx=useContext(AuthContext);
+  
 
-  const [cartIsShown, setCartIsShown] = useState(false)
-  const ShowCartHandler = () => {
-    setCartIsShown(true)
-  }
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
 
-  function HideCartHandler() {
-    setCartIsShown(false)
-  }
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
+
   return (
-    <>
-      <Cartprovider>
-        {cartIsShown && <Cart onClose={HideCartHandler} />}
-        <Header onShowCart={ShowCartHandler} /> <br /><br /><br />
-        <RouterProvider router={router} />
-        <Footer />
-      </Cartprovider>
-    </>
-  );
+    <CartProvider>
+      <Headers  onShowCart={showCartHandler}/>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      <Routes>
+        { authCtx.isLonggedIn && (
+          <Route path='Product' element={<Product/>}/>
+        )}
+        
+      <Route path='about' element={<About/>}/>
+      <Route path='Home'element={<Home/>}/>
+      <Route path='ContactUs' element={<ContactUs/>}/>
+      <Route path='/auth' element={<AuthForm/>}/>
+      {authCtx.isLonggedIn && (
+         <Route path='/profile' element={<UserProfile/>}/>
+      )}
+      
+      <Route path='*' element={<Home />} /> {/* Default route */}
+      </Routes>
+      
+      <Footer/>
+    </CartProvider>
+  )
 }
 
-export default App;
+export default App

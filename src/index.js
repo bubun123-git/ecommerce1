@@ -3,19 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { AuthContextProvider } from './Components/AuthContext';
-
-
+import { BrowserRouter } from 'react-router-dom';
+import { AuthContextProvider } from './Component/Store/auth-Context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
-  
+  <AuthContextProvider>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  </AuthContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
